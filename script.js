@@ -1,53 +1,59 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Sample job data
-    const jobs = [
-        {
-            id: 1,
-            title: "Administrative Officer",
-            department: "Ministry of Education",
-            level: "Officer (5th Level)",
-            deadline: "2023-12-15",
-            vacancies: 5,
-            location: "Kathmandu"
-        },
-        {
-            id: 2,
-            title: "IT Officer",
-            department: "Ministry of Communication",
-            level: "Officer (6th Level)",
-            deadline: "2023-12-20",
-            vacancies: 3,
-            location: "Kathmandu"
-        },
-        {
-            id: 3,
-            title: "Health Assistant",
-            department: "Ministry of Health",
-            level: "Assistant (4th Level)",
-            deadline: "2023-12-10",
-            vacancies: 15,
-            location: "Province 1"
-        },
-        {
-            id: 4,
-            title: "Agriculture Technician",
-            department: "Ministry of Agriculture",
-            level: "Technical (4th Level)",
-            deadline: "2023-12-25",
-            vacancies: 10,
-            location: "Province 2"
-        }
-    ];
+document.addEventListener("DOMContentLoaded", () => {
+  // Check if user is logged in
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+  if (!currentUser) {
+    window.location.href = "login.html"
+    return
+  }
 
-    // DOM Elements
-    const jobListingsEl = document.getElementById('job-listings');
-    const applicationFormSection = document.getElementById('application-form-section');
-    const jobsSection = document.getElementById('jobs-section');
-    const jobApplicationForm = document.getElementById('jobApplicationForm');
+  // Update user profile in sidebar
+  const userProfileImg = document.querySelector(".user-profile img")
+  const userProfileName = document.querySelector(".user-profile h3")
+  const userProfileLocation = document.querySelector(".user-profile p")
 
-    // Render job listings
-    function renderJobs() {
-        jobListingsEl.innerHTML = jobs.map(job => `
+  userProfileImg.src = currentUser.profileImage
+  userProfileName.textContent = currentUser.fullName
+  userProfileLocation.textContent = currentUser.location
+
+  // Handle logout
+  document.getElementById("logout-link").addEventListener("click", (e) => {
+    e.preventDefault()
+    localStorage.removeItem("currentUser")
+    window.location.href = "login.html"
+  })
+
+  // Profile link handling
+  document.getElementById("profile-link").addEventListener("click", (e) => {
+    e.preventDefault()
+    window.location.href = "profile.html"
+  })
+
+  // DOM Elements
+  const jobListingsEl = document.getElementById("job-listings")
+  const applicationFormSection = document.getElementById("application-form-section")
+  const jobsSection = document.getElementById("jobs-section")
+  const jobApplicationForm = document.getElementById("jobApplicationForm")
+
+  // Fetch jobs from JSON file
+  fetch("data/jobs.json")
+    .then((response) => response.json())
+    .then((jobs) => {
+      // Store jobs in a variable for later use
+      window.jobsData = jobs
+
+      // Render job listings
+      renderJobs(jobs)
+    })
+    .catch((error) => {
+      console.error("Error fetching job data:", error)
+      jobListingsEl.innerHTML = "<p>Error loading jobs. Please try again later.</p>"
+    })
+
+  // Render job listings
+  function renderJobs(jobs) {
+    jobListingsEl.innerHTML = jobs
+      .map(
+        (job) => `
             <div class="job-card">
                 <h3>${job.title}</h3>
                 <div class="job-meta">
@@ -59,64 +65,92 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <button class="apply-btn" data-job-id="${job.id}">Apply Now</button>
             </div>
-        `).join('');
+        `,
+      )
+      .join("")
+  }
+
+  // Handle apply button click
+  jobListingsEl.addEventListener("click", (e) => {
+    if (e.target.classList.contains("apply-btn")) {
+      const jobId = Number.parseInt(e.target.getAttribute("data-job-id"))
+      const selectedJob = window.jobsData.find((job) => job.id === jobId)
+
+      // Show application form and hide job listings
+      jobsSection.classList.add("hidden")
+      applicationFormSection.classList.remove("hidden")
+
+      // You can use the selectedJob data to pre-fill parts of the form
+      console.log("Applying for:", selectedJob.title)
+    }
+  })
+
+  // Handle form submission
+  jobApplicationForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    // Form validation
+    const mobileInput = document.getElementById("mobile")
+    if (!mobileInput.checkValidity()) {
+      alert("Please enter a valid 10-digit Nepali mobile number starting with 98 or 97")
+      return
     }
 
-    // Handle apply button click
-    jobListingsEl.addEventListener('click', function(e) {
-        if (e.target.classList.contains('apply-btn')) {
-            const jobId = parseInt(e.target.getAttribute('data-job-id'));
-            const selectedJob = jobs.find(job => job.id === jobId);
-            
-            // Show application form and hide job listings
-            jobsSection.classList.add('hidden');
-            applicationFormSection.classList.remove('hidden');
-            
-            // You can use the selectedJob data to pre-fill parts of the form
-            console.log("Applying for:", selectedJob.title);
-        }
-    });
+    // Collect form data
+    const formData = {
+      userId: currentUser.id,
+      fullName: document.getElementById("fullName").value,
+      dob: document.getElementById("dob").value,
+      citizenshipNo: document.getElementById("citizenshipNo").value,
+      mobile: mobileInput.value,
+      email: document.getElementById("email").value,
+      education: document.getElementById("education").value,
+      applicationDate: new Date().toISOString(),
+    }
 
-    // Handle form submission
-    jobApplicationForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Form validation
-        const mobileInput = document.getElementById('mobile');
-        if (!mobileInput.checkValidity()) {
-            alert('Please enter a valid 10-digit Nepali mobile number starting with 98 or 97');
-            return;
-        }
-        
-        // Collect form data
-        const formData = {
-            fullName: document.getElementById('fullName').value,
-            dob: document.getElementById('dob').value,
-            citizenshipNo: document.getElementById('citizenshipNo').value,
-            mobile: mobileInput.value,
-            email: document.getElementById('email').value,
-            education: document.getElementById('education').value
-        };
-        
-        // In a real app, you would send this data to a server
-        console.log("Form submitted:", formData);
-        
-        // Show success message
-        alert('Application submitted successfully!');
-        
-        // Reset form and show job listings again
-        jobApplicationForm.reset();
-        applicationFormSection.classList.add('hidden');
-        jobsSection.classList.remove('hidden');
-    });
+    // In a real app, you would send this data to a server
+    console.log("Form submitted:", formData)
 
-    // Navigation handling
-    document.getElementById('home-link').addEventListener('click', function(e) {
-        e.preventDefault();
-        applicationFormSection.classList.add('hidden');
-        jobsSection.classList.remove('hidden');
-    });
+    // Show success message
+    alert("Application submitted successfully!")
 
-    // Initial render
-    renderJobs();
-});
+    // Reset form and show job listings again
+    jobApplicationForm.reset()
+    applicationFormSection.classList.add("hidden")
+    jobsSection.classList.remove("hidden")
+  })
+
+  // Navigation handling
+  document.getElementById("home-link").addEventListener("click", (e) => {
+    e.preventDefault()
+    applicationFormSection.classList.add("hidden")
+    jobsSection.classList.remove("hidden")
+  })
+
+  // Sidebar menu handling
+  document.querySelectorAll(".sidebar-menu a").forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault()
+
+      // Remove active class from all links
+      document.querySelectorAll(".sidebar-menu a").forEach((l) => l.classList.remove("active"))
+
+      // Add active class to clicked link
+      this.classList.add("active")
+
+      // Handle different menu items
+      const id = this.id
+
+      if (id === "jobs-link") {
+        applicationFormSection.classList.add("hidden")
+        jobsSection.classList.remove("hidden")
+      } else if (id === "dashboard-link") {
+        // For now, just show jobs section
+        applicationFormSection.classList.add("hidden")
+        jobsSection.classList.remove("hidden")
+      } else if (id === "applications-link" || id === "documents-link" || id === "settings-link") {
+        alert("This feature is coming soon!")
+      }
+    })
+  })
+})

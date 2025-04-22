@@ -1,0 +1,111 @@
+[
+    {
+      "id": 1,
+      "title": "Administrative Officer",
+      "department": "Ministry of Education",
+      "level": "Officer (5th Level)",
+      "deadline": "2025-12-15",
+      "vacancies": 5,
+      "location": "Kathmandu"
+    },
+    {
+      "id": 2,
+      "title": "IT Officer",
+      "department": "Ministry of Communication",
+      "level": "Officer (6th Level)",
+      "deadline": "2025-12-20",
+      "vacancies": 3,
+      "location": "Kathmandu"
+    },
+    {
+      "id": 3,
+      "title": "Health Assistant",
+      "department": "Ministry of Health",
+      "level": "Assistant (4th Level)",
+      "deadline": "2025-12-10",
+      "vacancies": 15,
+      "location": "Province 1"
+    },
+    {
+      "id": 4,
+      "title": "Agriculture Technician",
+      "department": "Ministry of Agriculture",
+      "level": "Technical (4th Level)",
+      "deadline": "2025-12-25",
+      "vacancies": 10,
+      "location": "Province 2"
+    },
+    {
+      "id": 5,
+      "title": "Civil Engineer",
+      "department": "Ministry of Infrastructure",
+      "level": "Officer (7th Level)",
+      "deadline": "2025-12-30",
+      "vacancies": 8,
+      "location": "Bagmati Province"
+    },
+    {
+      "id": 6,
+      "title": "Software Developer",
+      "department": "Ministry of Technology",
+      "level": "Officer (6th Level)",
+      "deadline": "2025-12-18",
+      "vacancies": 4,
+      "location": "Kathmandu"
+    },
+    {
+      "id": 7,
+      "title": "Nurse",
+      "department": "Ministry of Health",
+      "level": "Assistant (5th Level)",
+      "deadline": "2025-12-22",
+      "vacancies": 20,
+      "location": "Province 3"
+    },
+    {
+      "id": 8,
+      "title": "Mechanical Engineer",
+      "department": "Ministry of Infrastructure",
+      "level": "Officer (7th Level)",
+      "deadline": "2025-12-28",
+      "vacancies": 6,
+      "location": "Gandaki Province"
+    },
+    {
+      "id": 9,
+      "title": "Teacher",
+      "department": "Ministry of Education",
+      "level": "Assistant (4th Level)",
+      "deadline": "2025-12-12",
+      "vacancies": 25,
+      "location": "Province 5"
+    },
+    {
+      "id": 10,
+      "title": "Data Analyst",
+      "department": "Ministry of Communication",
+      "level": "Officer (6th Level)",
+      "deadline": "2025-12-26",
+      "vacancies": 5,
+      "location": "Kathmandu"
+    },
+    {
+      "id": 11,
+      "title": "Environmental Scientist",
+      "department": "Ministry of Environment",
+      "level": "Officer (7th Level)",
+      "deadline": "2025-12-29",
+      "vacancies": 3,
+      "location": "Province 1"
+    },
+    {
+      "id": 12,
+      "title": "Finance Officer",
+      "department": "Ministry of Finance",
+      "level": "Officer (6th Level)",
+      "deadline": "2025-12-31",
+      "vacancies": 2,
+      "location": "Kathmandu"
+    }
+  ]
+  

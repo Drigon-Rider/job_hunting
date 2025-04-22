@@ -1,0 +1,19 @@
+[
+    {
+      "id": 1,
+      "username": "rambahadur",
+      "password": "password123",
+      "fullName": "Ram Bahadur",
+      "location": "Kathmandu, Nepal",
+      "profileImage": "https://randomuser.me/api/portraits/lego/3.jpg"
+    },
+    {
+      "id": 2,
+      "username": "sitadevi",
+      "password": "password123",
+      "fullName": "Sita Devi",
+      "location": "Pokhara, Nepal",
+      "profileImage": ""
+    }
+  ]
+  
