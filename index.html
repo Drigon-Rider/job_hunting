@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Government Job Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Government_of_Nepal_Logo.svg/1200px-Government_of_Nepal_Logo.svg.png" alt="Nepal Government Logo">
+                    <div class="logo-text">
+                        <h1>Nepal Sarkari Naukri</h1>
+                        <p>Government of Nepal Job Portal</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active" id="home-link"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#" id="profile-link"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="dashboard">
+            <aside class="sidebar">
+                <div class="user-profile">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Profile">
+                    <h3>Ram Bahadur</h3>
+                    <p>Kathmandu, Nepal</p>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" id="dashboard-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#" id="jobs-link"><i class="fas fa-briefcase"></i> Available Jobs</a></li>
+                    <li><a href="#" id="applications-link"><i class="fas fa-file-alt"></i> My Applications</a></li>
+                    <li><a href="#" id="documents-link"><i class="fas fa-file-upload"></i> Upload Documents</a></li>
+                    <li><a href="#" id="settings-link"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </aside>
+
+            <main class="main-content">
+                <section id="jobs-section">
+                    <h2 class="section-title">Available Government Jobs</h2>
+                    <div class="job-listings" id="job-listings">
+                        <!-- Jobs will be loaded here by JavaScript -->
+                    </div>
+                </section>
+
+                <section id="application-form-section" class="hidden">
+                    <div class="application-form">
+                        <h2 class="form-title">Job Application Form</h2>
+                        <form id="jobApplicationForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dob">Date of Birth</label>
+                                    <input type="date" id="dob" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="citizenshipNo">Citizenship Number</label>
+                                <input type="text" id="citizenshipNo" class="form-control" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="mobile">Mobile Number</label>
+                                    <input type="tel" id="mobile" class="form-control" pattern="(98|97)[0-9]{8}" minlength="10" maxlength="10" required>
+                                    <span class="error-message">Please enter a valid 10-digit Nepali number starting with 98 or 97</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="education">Highest Education Qualification</label>
+                                <select id="education" class="form-control" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="slc">SLC/SEE</option>
+                                    <option value="plus2">+2/Intermediate</option>
+                                    <option value="bachelor">Bachelor's Degree</option>
+                                    <option value="master">Master's Degree</option>
+                                    <option value="phd">PhD</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Upload Documents (PDF only)</label>
+                                <input type="file" id="documents" accept=".pdf" multiple required>
+                            </div>
+
+                            <button type="submit" class="btn submit-btn">Submit Application</button>
+                        </form>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
